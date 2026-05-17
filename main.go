@@ -32,14 +32,13 @@ func generateShortened(w http.ResponseWriter, req *http.Request) {
 		log.Fatal(err)
 	}
 
-	slug := rand.Text()[:5]
-
 	if reverse_urls[response.Url] == "" {
+		slug := rand.Text()[:5]
 		urls[slug] = response.Url
 		reverse_urls[response.Url] = slug
 	}
 
-	fmt.Fprint(w, slug)
+	fmt.Fprint(w, reverse_urls[response.Url])
 }
 
 func redirectFromShortened(w http.ResponseWriter, req *http.Request) {
