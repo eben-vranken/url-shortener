@@ -47,7 +47,8 @@ func redirectFromShortened(w http.ResponseWriter, req *http.Request) {
 
 	if fullUrl == "" {
 		fmt.Fprint(w, "404 - URL does not exists")
+		return
 	}
 
-	fmt.Fprint(w, "Redirecting to ", fullUrl)
+	http.Redirect(w, req, fullUrl, http.StatusTemporaryRedirect)
 }
